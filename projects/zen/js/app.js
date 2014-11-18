@@ -1,6 +1,6 @@
 // ZeNimbus 0.9.2 -- Nov '14
 
-var zeNimbus = (function(){ // module zeNimbus
+var zeNimbus = (function($){ // module zeNimbus
 	"use strict"
 
 	var zv, // chimes
@@ -171,7 +171,7 @@ var zeNimbus = (function(){ // module zeNimbus
 	return 	{
 				synthbox : synthBox
 			};
-}());
+}(jQuery));
 
 (function(){
 	zeNimbus.synthbox();
