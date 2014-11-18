@@ -1,0 +1,44 @@
+body{
+	
+	background-color: rgba(41,45,48,1);
+	margin: 0px; 
+	padding: 0px;
+}
+
+img {
+	max-width: 100%
+}
+
+.container {
+	position: absolute; 
+	width: 100%; 
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+#marquee{
+	padding: 0px;
+	margin-top: 10%;
+	text-align: center;
+}
+
+#zenVolume {
+	height: 6em;
+	width: 0.3em;
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+.ui-slider {
+	background-color: rgba(0,0,0,0);
+	border-left: 1px solid rgba(255,255,255,0.25);
+	margin: 1em 0 0 0.25em;
+}
+
+.ui-slider .ui-slider-handle {
+	background-color: rgba(255,255,255,1);
+	border-radius: 0.25em;
+	height: 0.6em;
+	width: 0.6em;
+}

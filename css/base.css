@@ -1,0 +1,24 @@
+body{
+	
+	background-color: rgba(41,45,48,1);
+	margin: 0px; 
+	padding: 0px;
+}
+
+img {
+	max-width: 100%
+}
+
+.container {
+	position: absolute; 
+	width: 100%; 
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+#marquee{
+	padding: 0px;
+	margin-top: 15%;
+	text-align: center;
+}
