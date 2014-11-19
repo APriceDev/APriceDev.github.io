@@ -1,0 +1,88 @@
+body{
+	
+	background-color: rgba(0,0,0,0.55);
+	margin: 0px; 
+	padding: 0px;
+}
+
+
+.gradient {
+  background-image:
+    linear-gradient(
+      rgba(5,52,220,0.5), rgba(10,190,200,0.35)
+    );
+}
+
+/*.gradient {
+  background-image:
+    linear-gradient(
+      to top left, 
+      rgba(40,245,0,0.25), rgba(200,0,0,0.75)
+    );
+}*/
+
+.container{
+	background-color: rgba(0,0,255,0.2);
+	position: absolute; 
+	width: 100%; 
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+#masterSwitch{
+	background-color: rgba(65,147,196,0.5);
+	border: 1px solid rgba(255,255,255,0.5);
+	border-radius: 0.25em;
+	height: 0.8em;
+	width: 0.8em;
+	position: relative; 
+	margin-top: 20%;
+	margin-left: auto; 
+	margin-right: auto; 
+	padding: 0px;
+	
+	font-family: serif;
+	font-size: 4em;
+	line-height: 2em;
+	text-align: center;
+}
+
+#controls {
+	background-color: rgba(255,0,0,0);
+	border: 1px solid rgba(255,255,255,0);
+	margin: auto;
+	text-align: center;
+}
+
+#masterVolume #panner #filter01 #filter02 #reverb {
+	height: 7em;
+	width: 0.03em;
+
+}
+
+.ui-slider {
+	background-color: rgba(0,0,0,0);
+	border-left: 1px solid rgba(255,255,255,0.25);
+	border-radius: 0.25em;
+	margin: 1em 0 0 0.35em;
+}
+
+.ui-slider .ui-slider-handle {
+	background-color: rgba(65,147,196,1);
+	border: 1px solid rgba(255,255,255,0.4);
+	border-radius: 0.25em;
+	height: 0.6em;
+	width: 0.6em;
+}
+
+.filters {
+	display: inline-block;
+}
+
+.ui-slider:hover {
+	border-left: 1px solid rgba(255,255,100,0.4);
+}
+.ui-slider-handle:hover {
+	background-color: rgba(151,166,93,1);
+}

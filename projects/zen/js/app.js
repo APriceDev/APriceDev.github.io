@@ -1,6 +1,6 @@
-// ZeNimbus 0.9.2 -- Nov '14
+// ZeNimbus 0.9.2 --
 
-var zeNimbus = (function($){ // module zeNimbus
+var zeNimbus = (function($){
 	"use strict"
 
 	var zv, // chimes
