@@ -1,6 +1,8 @@
 body{
 
   background-color: rgba(41, 45, 48, 1);
+  font-family: 'Roboto Condensed', sans-serif;
+  letter-spacing: 0.5em;
   margin: 0px;
   padding: 0px;
 }
