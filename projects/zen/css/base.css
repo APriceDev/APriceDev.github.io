@@ -1,7 +1,7 @@
 body{
-	
+
 	background-color: rgba(41,45,48,1);
-	margin: 0px; 
+	margin: 0px;
 	padding: 0px;
 }
 
@@ -10,10 +10,10 @@ img {
 }
 
 .container {
-	position: absolute; 
-	width: 100%; 
-	height: 100%; 
-	margin: 0px; 
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
 	padding: 0px;
 }
 
@@ -26,7 +26,7 @@ img {
 #zenVolume {
 	height: 6em;
 	width: 0.3em;
-	margin-left: auto; 
+	margin-left: auto;
 	margin-right: auto;
 }
 

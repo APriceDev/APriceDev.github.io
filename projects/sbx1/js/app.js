@@ -1,4 +1,25 @@
-// SBX1 0.9
+// SBX1 0.9, Oct 2014
+
+// http://it-ebooks.info/
+// http://chimera.labs.oreilly.com/books/1234000001552/ch06.html //Biquad Filters
+// http://creativejs.com/resources/web-audio-api-a-bit-more-advanced/
+// http://webaudio.github.io/web-audio-api/
+// https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#attributes-PannerNode_attributes
+// https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode
+// https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode.buffer
+// https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode.normalize
+// http://www.html5rocks.com/en/tutorials/webaudio/intro/
+// https://developer.tizen.org/documentation/articles/advanced-web-audio-api-usage
+// https://developer.mozilla.org/en-US/docs/Web/API/AudioNode.connect%28AudioParam%29
+// http://noisehack.com/
+// http://www.sitepoint.com/html5-web-audio-api-tutorial-building-virtual-synth-pad/
+// https://developer.mozilla.org/en-US/docs/Web/API/WaveShaperNode
+
+// http://stackoverflow.com/questions/5873810/how-can-i-get-last-characters-of-a-string-using-javascript
+// http://stackoverflow.com/questions/5765398/whats-the-best-way-to-convert-a-number-to-a-string
+
+// https://www.google.com/search?q=web+audio+api+visualizer&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&channel=sb
+// http://forestmist.org/share/web-audio-api-demo/
 
 var sbx1 = (function($) {
 "use strict";

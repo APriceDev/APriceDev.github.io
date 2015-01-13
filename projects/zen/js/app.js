@@ -1,6 +1,6 @@
-// ZeNimbus 0.9.2 --
+// ZeNimbus 0.9.2 -- Nov '14
 
-var zeNimbus = (function($){
+var zeNimbus = (function($){ // module zeNimbus
 	"use strict"
 
 	var zv, // chimes
@@ -16,10 +16,10 @@ var zeNimbus = (function($){
 		frq,
 		freq = {
 			freq0 : 261.63, 									// fundamental
-			freq1 : function(){return 9 * (this.freq0 / 8);},	// second
-			freq2 : function(){return 4 * (this.freq0 / 3);},	// third
-			freq3 : function(){return 3 * (this.freq0 / 2);},	// fifth
-			freq4 : function(){return 5 * (this.freq0 / 3);},	// sixth
+			freq1 : function(){return 9 * (this.freq0 / 8);},		// second
+			freq2 : function(){return 4 * (this.freq0 / 3);},		// third
+			freq3 : function(){return 3 * (this.freq0 / 2);},		// fifth
+			freq4 : function(){return 5 * (this.freq0 / 3);},		// sixth
 			freq5 : function(){return this.freq0 * 2;} 			// one octave up
 		},
 		oscChime,
@@ -29,7 +29,6 @@ var zeNimbus = (function($){
 		masterGainVol = 0.5,
 		nodes = [oscChime, envelope, panner, masterGain],
 		destination;
-
 	// ctor
 	function synthBox(){
 
@@ -111,7 +110,7 @@ var zeNimbus = (function($){
 		envelope.gain.linearRampToValueAtTime(0.0, startTime + endTime);
 		masterGain.gain.value = masterGainVol;
 		panner.setPosition(xPos,0,zPos);
-		
+
 		updateChimesVol();
 
 		// connect nodes
@@ -135,7 +134,7 @@ var zeNimbus = (function($){
 	    		randfreq = Math.floor(Math.random() * (5 - 0 + 1)) + 0,
 	    	zenLoop = setTimeout(function() {
 	        	playChimes(randfreq);
-	        	loopChimes();  
+	        	loopChimes();
 	    	}, rand);
 
 	    	if(chimesToggle === "stop"){
@@ -163,7 +162,7 @@ var zeNimbus = (function($){
 		}
 	};
 
-	function setupEventListeners(){ 
+	function setupEventListeners(){
 		zenEl.addEventListener("click", toggleChimes);
 	};
 
