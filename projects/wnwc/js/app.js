@@ -36,8 +36,8 @@ var wnwc = (function($) {
 		canvas = document.getElementById("fft");
 
 		canvasCtx = canvas.getContext("2d");
-		canvasCtx.fillStyle = "rgba(41,45,148,0)",
-        		canvasCtx.fillRect(0,0,600,100);
+		//canvasCtx.fillStyle = "rgba(41,45,148,0)",
+        		//canvasCtx.fillRect(0,0,600,100);
 
 		ctx = new AudioContext();
 		setupEventListeners();
