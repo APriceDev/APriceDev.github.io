@@ -1,5 +1,5 @@
 // white noise and white caps
-// version 0.9.2
+// version 0.9.4
 
 var wnwc = (function($) {
 "use strict";
@@ -26,20 +26,17 @@ var wnwc = (function($) {
             canvasCtx,
             fbc_array,
             bars,
-            bar_x,
-            bar_width,
-            bar_height;
+            barX,
+            barWidth,
+            barHeight;
 
 	function init(){
 
 		master = document.getElementById("masterSwitch");
 		canvas = document.getElementById("fft");
 
-		canvasCtx = canvas.getContext("2d");
-		//canvasCtx.fillStyle = "rgba(41,45,148,0)",
-        		//canvasCtx.fillRect(0,0,600,100);
-
 		ctx = new AudioContext();
+                             canvasCtx = canvas.getContext("2d");
 		setupEventListeners();
 	};
 
@@ -136,7 +133,6 @@ var wnwc = (function($) {
 
                              analyser.connect(destination);
 
-
 		for (var i = 0; i < path.length; i++) {
 			path[i].start(0);
 		};
@@ -145,18 +141,20 @@ var wnwc = (function($) {
 	};
 
                function frameLooper(){
+
                             window.requestAnimationFrame(frameLooper);
                             fbc_array = new Uint8Array(analyser.frequencyBinCount);
                             analyser.getByteFrequencyData(fbc_array);
                             canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-                            canvasCtx.fillStyle = "rgba(255,255,255,0.25)";
                             bars = 200;
+
                             for (var i = 3; i < bars; i++) {
 
-                                bar_x = i * 3;
-                                bar_width = 2;
-                                bar_height = -(fbc_array[i] / 2);
-                                canvasCtx.fillRect(bar_x, canvas.height, bar_width, bar_height);
+                                barX = i * 3;
+                                barWidth = 2;
+                                barHeight = -(fbc_array[i] / 2);
+                                canvasCtx.fillStyle = "rgba(255,255,255," + Math.abs(barHeight / 100) +  ")";
+                                canvasCtx.fillRect(barX, canvas.height, barWidth, barHeight);
                             }
                };
 

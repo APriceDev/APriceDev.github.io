@@ -4,7 +4,7 @@ body{
     margin: 0px;
     padding: 0px;
     font-family: sans-serif;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
 }
 
 
@@ -77,7 +77,7 @@ body{
 #sine01{
     top: 0px;
     left: 0px;
-    border-top: 5px solid rgba(255,255,255, 0.5);
+    border-top: 5px solid rgba(255,255,255, 0.7);
     /*z-index: 3;*/
 }
 
