@@ -166,7 +166,7 @@ var wnwc = (function($) {
 		};
 
                             function looperF(){
-                                window.cancelAnimationFrame(looper)
+                                window.cancelAnimationFrame(looper);
                             };
 
                             setTimeout(looperF, 200);
