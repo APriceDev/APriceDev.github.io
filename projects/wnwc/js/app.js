@@ -28,7 +28,8 @@ var wnwc = (function($) {
             bars,
             barX,
             barWidth,
-            barHeight;
+            barHeight,
+            looper;
 
 	function init(){
 
@@ -60,8 +61,6 @@ var wnwc = (function($) {
 
                              analyser = ctx.createAnalyser();
                              analyser.fftsize = 2048;
-
-
 
 		oscOne = ctx.createBufferSource();
 		whiteNoise(oscOne);
@@ -142,7 +141,7 @@ var wnwc = (function($) {
 
                function frameLooper(){
 
-                            window.requestAnimationFrame(frameLooper);
+                            looper = window.requestAnimationFrame(frameLooper);
                             fbc_array = new Uint8Array(analyser.frequencyBinCount);
                             analyser.getByteFrequencyData(fbc_array);
                             canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
@@ -165,6 +164,12 @@ var wnwc = (function($) {
 		for (var i = 0; i < path.length; i++) {
 			path[i].stop(0);
 		};
+
+                            function looperF(){
+                                window.cancelAnimationFrame(looper)
+                            };
+
+                            setTimeout(looperF, 200);
 	};
 
 	function toggleOsc(){
