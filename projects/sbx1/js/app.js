@@ -41,6 +41,11 @@ var ctx,
 	masterGainVol = 0.5,
 	masterPan,
 	masterPanLevel = 0,
+	canvas,
+	canvasCtx,
+	analyser,
+	bufferLength,
+	dataArray,
 	destination,
 	ms,
 	mv,
@@ -49,14 +54,25 @@ var ctx,
 	f2,
 	f3;
 
-	function synthBox(){
+	function init(){
 
 		ms = document.getElementById("masterSwitch"),
 		mv = $("#masterVolume"),
 		pan = $("#panner"),
 		f1 = $("#filter01"),
 		f2 = $("#filter02"),
-		f3 = $("#filter03");
+		f3 = $("#filter03"),
+
+		canvas = document.getElementById("scope"),
+		canvasCtx = canvas.getContext("2d");
+
+		canvasCtx.beginPath();
+      		canvasCtx.moveTo(600, 50);
+      		canvasCtx.lineTo(0, 50);
+      		canvasCtx.lineWidth = 2;
+      		canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+      		canvasCtx.stroke();
+
 
 		mv.slider({
 				orientation: "vertical",
@@ -145,7 +161,7 @@ var ctx,
 			});
 
 		ctx = new AudioContext();
-		setupEventListeners();	
+		setupEventListeners();
 	};
 
 	function getVerb(source, url) {
@@ -168,8 +184,16 @@ var ctx,
 
 	function startOsc(){
 
+
+
+
 		oscToggle = "start";
 		oscOne = ctx.createOscillator(),
+
+		analyser = ctx.createAnalyser(),
+                             	analyser.fftsize = 2048,
+
+
 		oscOneGain = ctx.createGain(),
 		oscOne.type = "sawtooth",
 		oscOne.frequency.value = 110,
@@ -200,19 +224,59 @@ var ctx,
 		lfo1.connect(oscOneGain.gain);
 
 		oscOne.connect(oscOneGain);
-		
+
 		oscOneGain.connect(lpf);
 		lpf.connect(masterPan);
 		masterPan.connect(convolver);
 		convolver.connect(masterGain);
-		masterGain.connect(destination);
+		//masterGain.connect(destination);
+		masterGain.connect(analyser);
+		analyser.connect(destination);
 
 		oscOne.start(0);
 		lfo1.start(0);
+		waveLooper();
+	};
+
+	function waveLooper(){
+		window.requestAnimationFrame(waveLooper);
+
+		bufferLength = analyser.fftSize,
+		dataArray = new Uint8Array(bufferLength);
+		canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+		analyser.getByteTimeDomainData(dataArray);
+
+		canvasCtx.fillStyle = "rgba(255, 255, 255, 0)";
+      		canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+      		canvasCtx.lineWidth = 2;
+      		canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+      		canvasCtx.beginPath();
+
+      		var sliceWidth = canvas.width * 1.0 / bufferLength;
+      		var x = 0;
+
+		for(var i = 0; i < bufferLength; i++) {
+
+			var v = dataArray[i] / 128.0;
+			var y = v * canvas.height/2;
+
+			if(i === 0) {
+				canvasCtx.moveTo(x, y);
+			} else {
+				canvasCtx.lineTo(x, y);
+			}
+
+			x += sliceWidth;
+		}
+
+		canvasCtx.lineTo(canvas.width, canvas.height/2);
+     		 canvasCtx.stroke();
+
 	};
 
 	function stopOsc(){
-		
+
 		oscToggle = "stop";
 		oscOne.stop(0);
 		lfo1.stop(0);
@@ -276,17 +340,17 @@ var ctx,
 		oscToggle !== "start" ? startOsc() : stopOsc()
 	};
 
-	function setupEventListeners(){ 
+	function setupEventListeners(){
 
 		ms.addEventListener("click", toggleOsc);
 	};
 
 	return 	{
-		synthbox : synthBox
+		init : init
 	};
 
 }(jQuery));
 
 (function(){
-	sbx1.synthbox();
+	sbx1.init();
 }());
