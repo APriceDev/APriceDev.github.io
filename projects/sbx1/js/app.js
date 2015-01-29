@@ -46,6 +46,7 @@ var ctx,
 	analyser,
 	bufferLength,
 	dataArray,
+	looper,
 	destination,
 	ms,
 	mv,
@@ -239,7 +240,7 @@ var ctx,
 	};
 
 	function waveLooper(){
-		window.requestAnimationFrame(waveLooper);
+		looper = window.requestAnimationFrame(waveLooper);
 
 		bufferLength = analyser.fftSize,
 		dataArray = new Uint8Array(bufferLength);
@@ -263,7 +264,8 @@ var ctx,
 
 			if(i === 0) {
 				canvasCtx.moveTo(x, y);
-			} else {
+			}
+			else {
 				canvasCtx.lineTo(x, y);
 			}
 
@@ -271,8 +273,7 @@ var ctx,
 		}
 
 		canvasCtx.lineTo(canvas.width, canvas.height/2);
-     		 canvasCtx.stroke();
-
+     		canvasCtx.stroke();
 	};
 
 	function stopOsc(){
@@ -280,6 +281,12 @@ var ctx,
 		oscToggle = "stop";
 		oscOne.stop(0);
 		lfo1.stop(0);
+
+		function looperF(){
+			window.cancelAnimationFrame(looper)
+		};
+
+		setTimeout(looperF, 4000);
 	};
 
 	function updateLFO1(l, el){
