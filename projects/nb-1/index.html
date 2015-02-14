@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NoiseBox NB-1</title>
+    <link rel="stylesheet" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+</head>
+<body>
+    <div class="container">
+
+        <div class="oscillator">
+            <div class="titles">OSC 1</div>
+            <div class="toggle" id ="osc1Btn"></div>
+            <div>
+                <label for="volume">volume</label><span id="volumeState"></span>
+                <div class="sliders" id="volume" title="volume"></div>
+            </div>
+            <div id="radio">
+                <input type="radio" id="sine" name="radio" checked="checked"><label for="sine"><span></span>Sine</label>
+                <input type="radio" id="square" name="radio"><label for="square"><span></span>Square</label>
+                <input type="radio" id="triangle" name="radio"><label for="triangle"><span></span>Triangle</label>
+                <input type="radio" id="sawtooth" name="radio"><label for="sawtooth"><span></span>Saw</label>
+            </div>
+
+        </div>
+
+        <div id="scopeHolder">
+            <div class="oscope" id="scopeLable">
+                SCOPE
+            </div>
+            <canvas id="scope" height="100" width="400"></canvas>
+            <div class="oscope" id="fftLable">
+                FFT
+            </div>
+            <canvas id="fft" height="100" width="400"></canvas>
+        </div>
+
+    </div>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
