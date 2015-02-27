@@ -9,23 +9,38 @@
 <body>
     <div class="container">
 
-        <div class="oscillator">
-            <div class="titles">OSC 1</div>
-            <div class="toggle" id ="osc1Btn"></div>
-            <div>
-                <label for="volume">volume</label><span id="volumeState"></span>
-                <div class="sliders" id="volume" title="volume"></div>
+        <div class="rack">
+            <div class="oscillator">
+                <div class="titles">OSC 1</div>
+                <div class="toggle" id ="osc1Btn"></div>
+                <div>
+                    <label for="volume">volume</label><span id="volumeState"></span>
+                    <div class="sliders" id="volume" title="volume"></div>
+                    <label for="frequency">frequency</label><span id="frequencyState"></span>
+                    <div class="sliders" id="frequency" title="frequency"></div>
+                </div>
+                <div id="radioOcs">
+                    <input type="radio" id="sine" name="radioOcs" checked="checked"><label for="sine"><span></span>Sine</label>
+                    <input type="radio" id="square" name="radioOcs"><label for="square"><span></span>Square</label>
+                    <input type="radio" id="triangle" name="radioOcs"><label for="triangle"><span></span>Triangle</label>
+                    <input type="radio" id="sawtooth" name="radioOcs"><label for="sawtooth"><span></span>Saw</label>
+                </div>
+                <hr>
+                <div id="lfo">
+                    <label for="volumeLfo">lfo amount</label><span id="volumeLfoState"></span>
+                    <div class="sliders" id="volumeLfo" title="volumeLfo"></div>
+                    <label for="frequencyLfo">lfo frequency</label><span id="frequencyLfoState"></span>
+                    <div class="sliders" id="frequencyLfo" title="frequencyLfo"></div>
+                </div>
+                <div id="radioLfo">
+                    <input type="radio" id="sineLfo" name="radioLfo" checked="checked"><label for="sineLfo"><span></span>Sine</label>
+                    <input type="radio" id="squareLfo" name="radioLfo"><label for="squareLfo"><span></span>Square</label>
+                    <input type="radio" id="triangleLfo" name="radioLfo"><label for="triangleLfo"><span></span>Triangle</label>
+                    <input type="radio" id="sawtoothLfo" name="radioLfo"><label for="sawtoothLfo"><span></span>Saw</label>
+                </div>
             </div>
-            <div id="radio">
-                <input type="radio" id="sine" name="radio" checked="checked"><label for="sine"><span></span>Sine</label>
-                <input type="radio" id="square" name="radio"><label for="square"><span></span>Square</label>
-                <input type="radio" id="triangle" name="radio"><label for="triangle"><span></span>Triangle</label>
-                <input type="radio" id="sawtooth" name="radio"><label for="sawtooth"><span></span>Saw</label>
-            </div>
-
         </div>
-
-        <div id="scopeHolder">
+        <div class="rack">
             <div class="oscope" id="scopeLable">
                 SCOPE
             </div>

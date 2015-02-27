@@ -8,15 +8,29 @@ var nb1 = (function($){
     destination,
     osc1,
     osc1Type = "sine",
+    osc1Frq = 440,
     osc1Gain,
     osc1GainLevel = 0.25,
     vol,
     volumeState,
-    radio,
+    frq,
+    frqState,
+    radioOcs,
     osc1Btn,
     osc1Toggle,
+
+    ocs1LFO,
+    osc1LFOType = "sine",
+    osc1LFOFrq = 0,
+    ocs1LFOGain,
+    ocs1LFOGainLevel = 0,
+    volLFO,
+    frqLFO,
+    radioOcsLFO,
+
     analyser,
     canvasCtxScope,
+    isPaused = false,
     scope,
     looperScope,
     scopeBufferLength,
@@ -32,7 +46,10 @@ var nb1 = (function($){
 
     $(function($) {
 
-        vol = $("#volume")
+        vol = $("#volume");
+        frq = $("#frequency");
+        volLFO = $("#volumeLfo");
+        frqLFO = $("#frequencyLfo");
 
         vol.slider({
                     //orientation: "vertical",
@@ -50,13 +67,71 @@ var nb1 = (function($){
                     updateVolume(ui.value, this);
                     }
                 });
+
+        frq.slider({
+                    //orientation: "vertical",
+                    min: 10,
+                    max: 3000,
+                    step: 1,
+                    value: osc1Frq,
+                    slide: function(e, ui){
+
+                    updateFrequency(ui.value, this);
+                    },
+
+                    change: function(e, ui){
+
+                    updateFrequency(ui.value, this);
+                    }
+                });
+
+        volLFO.slider({
+                    //orientation: "vertical",
+                    min: 0,
+                    max: 1.01,
+                    step: 0.01,
+                    value: ocs1LFOGainLevel,
+                    slide: function(e, ui){
+
+                    updateLFOVolume(ui.value, this);
+                    },
+
+                    change: function(e, ui){
+
+                    updateLFOVolume(ui.value, this);
+                    }
+                });
+
+        frqLFO.slider({
+                    //orientation: "vertical",
+                    min: 0,
+                    max: 3000,
+                    step: 1,
+                    value: osc1LFOFrq,
+                    slide: function(e, ui){
+
+                    updateLFOFrequency(ui.value, this);
+                    },
+
+                    change: function(e, ui){
+
+                    updateLFOFrequency(ui.value, this);
+                    }
+                });
+
     });
 
+    var freeze = function(){
+
+        isPaused = !isPaused;
+        console.log(isPaused);
+    }
 
     var scopeLooper = function(){
         looperScope = window.requestAnimationFrame(scopeLooper);
 
         scopeBufferLength = analyser.fftSize,
+
         scopeBufferArray = new Uint8Array(scopeBufferLength);
         canvasCtxScope.clearRect(0, 0, scope.width, scope.height);
 
@@ -71,24 +146,24 @@ var nb1 = (function($){
         var sliceWidth = scope.width * 1.0 / scopeBufferLength;
         var x = 0;
 
-        for(var i = 0; i < scopeBufferLength; i++) {
+            for(var i = 0; i < scopeBufferLength; i++) {
 
-            var v = scopeBufferArray[i] / 128.0;
-            var y = v * scope.height/2;
+                var v = scopeBufferArray[i] / 128.0;
+                var y = v * scope.height/2;
 
-            if(i === 0) {
-                canvasCtxScope.moveTo(x, y);
+                if(i === 0) {
+                    canvasCtxScope.moveTo(x, y);
+                }
+                else {
+                    canvasCtxScope.lineTo(x, y);
+                }
+
+                x += sliceWidth;
             }
-            else {
-                canvasCtxScope.lineTo(x, y);
-            }
-
-            x += sliceWidth;
-        }
 
         canvasCtxScope.lineTo(scope.width, scope.height/2);
         canvasCtxScope.stroke();
-        // console.log("scope running");
+        //console.log("scope running");
     };
 
     function fftLooper(){
@@ -121,16 +196,31 @@ var nb1 = (function($){
 
         osc1 = audioCtx.createOscillator();
         osc1.type = osc1Type;
+        osc1.frequency.value = osc1Frq;
         osc1Gain = audioCtx.createGain();
 
+        ocs1LFO = audioCtx.createOscillator();
+        ocs1LFO.type = osc1LFOType;
+        ocs1LFO.frequency.value = osc1LFOFrq;
+        ocs1LFOGain = audioCtx.createGain();
+
         waveState();
+        waveStateLFO();
+
+        updateLFOVolume();
+        updateLFOFrequency();
         updateVolume();
+
+        ocs1LFO.connect(ocs1LFOGain);
+        ocs1LFOGain.connect(osc1Gain.gain);
+        // ocs1LFOGain.connect(destination);
 
         osc1.connect(osc1Gain);
         osc1Gain.connect(analyser);
         analyser.connect(destination);
 
         osc1.start(0);
+        ocs1LFO.start(0);
         scopeLooper();
         fftLooper();
     };
@@ -139,6 +229,7 @@ var nb1 = (function($){
 
         osc1Toggle = "stopOsc1";
         osc1.stop(0);
+        ocs1LFO.stop(0);
 
         function scopeLooperF(){
         window.cancelAnimationFrame(looperScope);
@@ -169,12 +260,60 @@ var nb1 = (function($){
         if (el !== undefined){
             volumeState.innerHTML = " " + (parseInt(value*100)) + "%";
         }
-    }
+    };
+
+    var updateFrequency = function(value, el){
+
+        value === undefined ? osc1Frq : osc1Frq = value;
+
+        if (osc1){
+            osc1.frequency.value = osc1Frq;
+        }
+
+        if (el !== undefined){
+            frequencyState.innerHTML = " " + value + " hz";
+        }
+    };
+
+    var updateLFOVolume = function(value, el){
+
+        value === undefined ? ocs1LFOGainLevel : ocs1LFOGainLevel = value;
+
+        if (ocs1LFOGain){
+            ocs1LFOGain.gain.value = ocs1LFOGainLevel;
+        }
+
+        if (el !== undefined){
+            volumeLfoState.innerHTML = " " + (parseInt(value*100)) + "%";
+        }
+    };
+
+    var updateLFOFrequency = function(value, el){
+
+        value === undefined ? osc1LFOFrq : osc1LFOFrq = value;
+
+        if (ocs1LFO){
+            ocs1LFO.frequency.value = osc1LFOFrq;
+        }
+
+        if (el !== undefined){
+            frequencyLfoState.innerHTML = " " + value + " hz";
+        }
+    };
+
     var waveState = function(e){
 
         e === undefined ? osc1Type : osc1Type = e.target.id;
         if(osc1){
             osc1.type = osc1Type;
+        }
+    };
+
+    var waveStateLFO = function(e){
+
+        e === undefined ? osc1LFOType : osc1LFOType = e.target.id.substring(0, e.target.id.length -3);
+        if(ocs1LFO){
+            ocs1LFO.type = osc1LFOType;
         }
     };
 
@@ -185,17 +324,23 @@ var nb1 = (function($){
 
     var setupEventListeners = function(){
 
+        scope.addEventListener("click", freeze);
         osc1Btn.addEventListener("click", toggleOsc1);
-        radio.addEventListener("click", waveState);
+        radioOcs.addEventListener("click", waveState);
+        radioOcsLFO.addEventListener("click", waveStateLFO);
     };
 
     var init = function(){
 
         osc1Btn = document.getElementById("osc1Btn");
-        radio = document.getElementById("radio");
+        radioOcs = document.getElementById("radioOcs");
+        radioOcsLFO = document.getElementById("radioLfo");
 
         volumeState = document.getElementById("volumeState");
         volumeState.innerHTML = " 25%";
+
+        frqState = document.getElementById("frequencyState");
+        frqState.innerHTML = " 440 hz";
 
         audioCtx = new AudioContext();
         scope = document.getElementById("scope"),
@@ -210,7 +355,6 @@ var nb1 = (function($){
 
         fft = document.getElementById("fft"),
         canvasCtxFft = fft.getContext("2d");
-
 
         setupEventListeners();
     };

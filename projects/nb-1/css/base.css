@@ -15,6 +15,21 @@ body{
     padding: 0px;
 }
 
+hr{
+    border: 0;
+    height: 1px;
+    background: rgba(41,45,48,0.5);
+}
+
+/*hr{
+     border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(0,0,0,0));
+}*/
+
 .titles{
     background-color: rgba(41,45,48,1);
     color: rgba(252,202,3,1);
@@ -30,7 +45,6 @@ body{
 .oscillator{
     border: 1px solid rgba(41,45,48,1);
     border-radius: 15px;
-    height: 204px;
     width: 200px;
     padding: 2px;
     margin: 10px 0 0 10px;
@@ -108,25 +122,29 @@ input[type="radio"]:checked + label span {
     width: 9px;
 }
 
-
-#scopeHolder{
-    position: relative;
+.rack{
     display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+canvas{
+    display: block;
 }
 
 #scope{
-    position: absolute;
+   /* position: absolute;
     left: 0px;
-    top: -154px;
+    top: -154px;*/
     border: 1px solid rgba(41,45,48,1);
     border-radius: 15px;
     margin: 10px 0 0 10px;
 }
 
 #fft{
-    position: absolute;
+    /*position: absolute;
     left: 0px;
-    top: -50px;
+    top: -50px;*/
     border: 1px solid rgba(41,45,48,1);
     border-radius: 15px;
     margin: 10px 0 0 10px;
@@ -150,11 +168,11 @@ input[type="radio"]:checked + label span {
 #scopeLable{
     position: absolute;
     left: 12px;
-    top: -46px;
+    top: 109px;
 }
 
 #fftLable{
     position: absolute;
     left: 12px;
-    top: 59px;
+    top: 221px;
 }
