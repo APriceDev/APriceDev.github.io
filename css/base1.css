@@ -50,6 +50,9 @@ header, footer{
     color: rgba(252,202,3,1);
     padding: 1%;
     width: 98%;
+}
+
+header{
     font-size: 1.1em;
 }
 
@@ -57,4 +60,6 @@ footer{
     position: absolute;
     bottom: 0;
     left: 0;
+    color: rgba(252,202,3,1);
+    font-size: 0.8em;
 }
