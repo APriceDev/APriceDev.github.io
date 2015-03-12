@@ -27,6 +27,13 @@ var nb1 = (function($){
     volLFO,
     frqLFO,
     radioOcsLFO,
+    lfoState,
+    lfoFrqState,
+
+    lpf,
+     frqLPF,
+     LFPFrq = 3000,
+     lpfFrqState,
 
     analyser,
     canvasCtxScope,
@@ -50,6 +57,7 @@ var nb1 = (function($){
         frq = $("#frequency");
         volLFO = $("#volumeLfo");
         frqLFO = $("#frequencyLfo");
+        frqLPF = $("#frequencyLpf");
 
         vol.slider({
                     //orientation: "vertical",
@@ -119,6 +127,24 @@ var nb1 = (function($){
                     }
                 });
 
+        frqLPF.slider({
+                    //orientation: "vertical",
+                    min: 0,
+                    max: 3000,
+                    step: 1,
+                    value: LFPFrq,
+                    slide: function(e, ui){
+
+                    updateLPFFrequency(ui.value, this);
+                    },
+
+                    change: function(e, ui){
+
+                    updateLPFFrequency(ui.value, this);
+                    }
+                });
+
+
     });
 
     var freeze = function(){
@@ -176,11 +202,11 @@ var nb1 = (function($){
 
         for (var i = 3; i < bars; i++) {
 
-        barX = i * 3;
-        barWidth = 2;
-        barHeight = -(fftBufferArray[i] / 2);
-        canvasCtxFft.fillStyle = "rgba(41,45,48," + Math.abs(barHeight / 100) +  ")";
-        canvasCtxFft.fillRect(barX, fft.height, barWidth, barHeight);
+            barX = i * 3;
+            barWidth = 2;
+            barHeight = -(fftBufferArray[i] / 2);
+            canvasCtxFft.fillStyle = "rgba(41,45,48," + Math.abs(barHeight / 100) +  ")";
+            canvasCtxFft.fillRect(barX, fft.height, barWidth, barHeight);
         }
         //console.log("fft running");
     };
@@ -191,8 +217,8 @@ var nb1 = (function($){
 
         destination  = audioCtx.destination;
 
-        analyser = audioCtx.createAnalyser(),
-        analyser.fftsize = 2048,
+        analyser = audioCtx.createAnalyser();
+        analyser.fftsize = 2048;
 
         osc1 = audioCtx.createOscillator();
         osc1.type = osc1Type;
@@ -204,11 +230,15 @@ var nb1 = (function($){
         ocs1LFO.frequency.value = osc1LFOFrq;
         ocs1LFOGain = audioCtx.createGain();
 
+        lpf = audioCtx.createBiquadFilter();
+        lpf.type = "lowpass";
+
         waveState();
         waveStateLFO();
 
         updateLFOVolume();
         updateLFOFrequency();
+        updateLPFFrequency();
         updateVolume();
 
         ocs1LFO.connect(ocs1LFOGain);
@@ -216,7 +246,8 @@ var nb1 = (function($){
         // ocs1LFOGain.connect(destination);
 
         osc1.connect(osc1Gain);
-        osc1Gain.connect(analyser);
+        osc1Gain.connect(lpf);
+        lpf.connect(analyser);
         analyser.connect(destination);
 
         osc1.start(0);
@@ -301,6 +332,21 @@ var nb1 = (function($){
         }
     };
 
+    var updateLPFFrequency = function(value, el){
+
+        value === undefined ? LFPFrq : LFPFrq = value;
+
+        if (lpf){
+            lpf.frequency.value = LFPFrq;
+        }
+
+        if (el !== undefined){
+            frequencyLpfState.innerHTML = " " + value + " hz";
+        }
+    };
+
+
+
     var waveState = function(e){
 
         e === undefined ? osc1Type : osc1Type = e.target.id;
@@ -338,9 +384,17 @@ var nb1 = (function($){
 
         volumeState = document.getElementById("volumeState");
         volumeState.innerHTML = " 25%";
-
         frqState = document.getElementById("frequencyState");
         frqState.innerHTML = " 440 hz";
+
+        lfoState = document.getElementById("volumeLfoState");
+        lfoState.innerHTML = " 0%";
+        lfoFrqState = document.getElementById("frequencyLfoState");
+        lfoFrqState.innerHTML = " 0 hz";
+
+        lpfFrqState = document.getElementById("frequencyLpfState");
+        lpfFrqState.innerHTML = " 3000 hz";
+
 
         audioCtx = new AudioContext();
         scope = document.getElementById("scope"),
