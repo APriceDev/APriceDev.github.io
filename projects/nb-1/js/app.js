@@ -150,46 +150,48 @@ var nb1 = (function($){
     var freeze = function(){
 
         isPaused = !isPaused;
-        console.log(isPaused);
+        //console.log(isPaused);
     }
 
     var scopeLooper = function(){
         looperScope = window.requestAnimationFrame(scopeLooper);
 
-        scopeBufferLength = analyser.fftSize,
+        if(!isPaused){
+            scopeBufferLength = analyser.fftSize,
 
-        scopeBufferArray = new Uint8Array(scopeBufferLength);
-        canvasCtxScope.clearRect(0, 0, scope.width, scope.height);
+            scopeBufferArray = new Uint8Array(scopeBufferLength);
+            canvasCtxScope.clearRect(0, 0, scope.width, scope.height);
 
-        analyser.getByteTimeDomainData(scopeBufferArray);
+            analyser.getByteTimeDomainData(scopeBufferArray);
 
-        canvasCtxScope.fillStyle = "rgba(255, 255, 255, 0)";
-        canvasCtxScope.fillRect(0, 0, scope.width, scope.height);
-        canvasCtxScope.lineWidth = 1;
-        canvasCtxScope.strokeStyle = "rgba(41,45,48,1)";
-        canvasCtxScope.beginPath();
+            canvasCtxScope.fillStyle = "rgba(255, 255, 255, 0)";
+            canvasCtxScope.fillRect(0, 0, scope.width, scope.height);
+            canvasCtxScope.lineWidth = 1;
+            canvasCtxScope.strokeStyle = "rgba(41,45,48,1)";
+            canvasCtxScope.beginPath();
 
-        var sliceWidth = scope.width * 1.0 / scopeBufferLength;
-        var x = 0;
+            var sliceWidth = scope.width * 1.0 / scopeBufferLength;
+            var x = 0;
 
-            for(var i = 0; i < scopeBufferLength; i++) {
+                for(var i = 0; i < scopeBufferLength; i++) {
 
-                var v = scopeBufferArray[i] / 128.0;
-                var y = v * scope.height/2;
+                    var v = scopeBufferArray[i] / 128.0;
+                    var y = v * scope.height/2;
 
-                if(i === 0) {
-                    canvasCtxScope.moveTo(x, y);
+                    if(i === 0) {
+                        canvasCtxScope.moveTo(x, y);
+                    }
+                    else {
+                        canvasCtxScope.lineTo(x, y);
+                    }
+
+                    x += sliceWidth;
                 }
-                else {
-                    canvasCtxScope.lineTo(x, y);
-                }
 
-                x += sliceWidth;
-            }
-
-        canvasCtxScope.lineTo(scope.width, scope.height/2);
-        canvasCtxScope.stroke();
-        //console.log("scope running");
+            canvasCtxScope.lineTo(scope.width, scope.height/2);
+            canvasCtxScope.stroke();
+            //console.log("scope running");
+        }
     };
 
     function fftLooper(){
@@ -278,6 +280,7 @@ var nb1 = (function($){
         };
 
         setTimeout(scopeLooperF, 10);
+        isPaused = false;
     };
 
     var updateVolume = function(value, el){

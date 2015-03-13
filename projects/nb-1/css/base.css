@@ -2,7 +2,6 @@ body{
     background-color: rgba(252,202,3,1);
     margin: 0px;
     padding: 0px;
-    font-family: 'Exo', sans-serif;
     color:  rgba(41,45,48,1);
     font-family: sans-serif;
 }
@@ -174,5 +173,10 @@ canvas{
 #fftLable{
     position: absolute;
     left: 12px;
-    top: 221px;
+    top: 239px;
+}
+
+#freeze{
+    width: 400px;
+    text-align: center;
 }
