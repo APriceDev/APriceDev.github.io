@@ -143,8 +143,6 @@ var nb1 = (function($){
                     updateLPFFrequency(ui.value, this);
                     }
                 });
-
-
     });
 
     var freeze = function(){
@@ -154,6 +152,7 @@ var nb1 = (function($){
     }
 
     var scopeLooper = function(){
+
         looperScope = window.requestAnimationFrame(scopeLooper);
 
         if(!isPaused){
@@ -254,6 +253,7 @@ var nb1 = (function($){
 
         osc1.start(0);
         ocs1LFO.start(0);
+        isPaused = false;
         scopeLooper();
         fftLooper();
     };
@@ -347,8 +347,6 @@ var nb1 = (function($){
             frequencyLpfState.innerHTML = " " + value + " hz";
         }
     };
-
-
 
     var waveState = function(e){
 
