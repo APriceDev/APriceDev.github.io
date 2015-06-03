@@ -10,8 +10,8 @@ var lissajous = (function(){
 
         for (var i = 0; i <amt; i++) {
 
-            x = Math.round(amp + i/10 * (Math.sin(i) * 10) + offsetX);
-            y = Math.round(amp * (Math.cos(i) * 10) + offsetY);
+            x = Math.round(amp + i/25 * (Math.sin(i) * 10) + offsetX);
+            y = Math.round(amp + i/30  * (Math.cos(i) * 10) + offsetY);
             canvasCtx.fillStyle = "rgba(41,45,48,1)";
             canvasCtx.fillRect(x, y, sz, sz);
         };
