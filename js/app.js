@@ -1,63 +1,36 @@
-// canvas demo
 
-var demo = (function($) {
-"use strict";
+var lissajous = (function(){
+    "use strict";
 
-    var canvas,
-            ctx;
+    var scope, canvasCtx;
 
-    function draw(){
-        canvas = document.getElementById("logo"),
-        ctx = canvas.getContext("2d"),
-        //ctx.fillStyle = "rgba(41,45,148,1)",
-        //ctx.fillRect(0,0,100,100);
-        ctx.beginPath();
-        ctx.moveTo(100,0);
-        ctx.lineTo(100,160);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "white";
-        ctx.stroke();
+    var drawSine = function(){
 
-        ctx.beginPath();
-        ctx.moveTo(0,160);
-        ctx.lineTo(100,0);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "white";
-        ctx.stroke();
+        var x, y, amt = 400, offsetX = scope.width/2, offsetY = scope.height/2, amp = 6, sz = 2;
 
-        ctx.beginPath();
-        ctx.moveTo(100,4);
-        ctx.lineTo(130,4);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "white";
-        ctx.stroke();
+        for (var i = 0; i <amt; i++) {
 
-        ctx.beginPath();
-        ctx.moveTo(130,93);
-        ctx.lineTo(42,93);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "white";
-        ctx.stroke();
-
-        // arc
-        var x = canvas.width / 1.63;
-        var y = canvas.height / 3.32;
-        var radius = 45;
-        var startAngle = 1.5 * Math.PI;
-        var endAngle = 2.5 * Math.PI;
-        var counterClockwise = false;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "white";
-        ctx.stroke();
-
+            x = Math.round(amp + i/10 * (Math.sin(i) * 10) + offsetX);
+            y = Math.round(amp * (Math.cos(i) * 10) + offsetY);
+            canvasCtx.fillStyle = "rgba(41,45,48,1)";
+            canvasCtx.fillRect(x, y, sz, sz);
+        };
     };
 
-    return  {box : draw};
+    var init = function(){
 
-}(jQuery));
+        scope = document.getElementById("scope"),
+        canvasCtx = scope.getContext("2d");
+
+        drawSine();
+    };
+
+    return {
+        init : init
+    };
+
+}());
 
 (function(){
-    demo.box();
+    lissajous.init();
 }());

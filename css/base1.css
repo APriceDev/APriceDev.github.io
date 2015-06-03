@@ -30,19 +30,12 @@ p {
     justify-content: center;
 }
 
-#marquee, #marqueeIng{
-    padding: 2em;
-}
-
 #marquee{
     letter-spacing: 2em;
     font-weight: bold;
     margin-top: 10%;
+    padding: 2em;
 
-}
-
-img {
-    max-width: 100%
 }
 
 header, footer{
