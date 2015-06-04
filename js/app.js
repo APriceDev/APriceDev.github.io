@@ -6,9 +6,9 @@ var lissajous = (function(){
 
     var drawLogo = function(){
 
-        var x, y, amt = 400, offsetX = scope.width/2 -25, offsetY = scope.height/2 , amp = 6, sz = 2 , opacity = 0.8;
+        var x, y, amt = 400, offsetX = scope.width/2 -25, offsetY = scope.height/2, amp = 6, sz = 8, opacity = 0.8;
 
-        for (var i = 0; i <amt; i++) {
+        for (var i = 0; i < amt; i++) {
 
             x = Math.round(amp + i/25 * (Math.sin(i) * 10) + offsetX);
             y = Math.round(amp + i/30  * (Math.cos(i) * 10) + offsetY);
