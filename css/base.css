@@ -26,6 +26,29 @@ body{
 
 }
 
+#scope{
+    -webkit-filter: blur(60px);
+    filter: blur(60px);
+}
+
+.unBlur{
+  -webkit-animation: blur 1.5s linear forwards;
+  animation: blur 1.5s linear forwards;
+}
+
+.delay {
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+
+@keyframes blur {
+  to {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+  }
+}
+
+
 header, footer{
     background-color: rgba(41,45,48,1);
     color: rgba(252,202,3,1);
