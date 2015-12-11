@@ -10,11 +10,12 @@ body{
 }
 
 a{
-    color:  rgba(255,255,255,1);
+    color:  rgba(255,255,255,0.8);
+    font-weight: 100;
 }
 
 a:link{
-    font-size: 0.8em;
+
     text-decoration: none;
 }
 #container{
@@ -35,20 +36,20 @@ a:link{
 
 #subMarquee{
     color:  rgba(255,255,255,0.5);
-    letter-spacing: 0.25em;
+    letter-spacing: 0.15em;
     font-weight: 100;
     font-size: 1.25em;
     padding: 1.8em;
 }
 
 #scope{
-    -webkit-filter: blur(60px);
-    filter: blur(60px);
+    -webkit-filter: blur(80px);
+    filter: blur(80px);
 }
 
 .unBlur{
-  -webkit-animation: blur 1.5s linear forwards;
-  animation: blur 1.5s linear forwards;
+  -webkit-animation: blur 2.5s linear forwards;
+  animation: blur 2.5s linear forwards;
 }
 
 .delay {
