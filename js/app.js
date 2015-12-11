@@ -12,7 +12,8 @@ var lissajous = (function(){
 
             x = Math.round(amp + i/25 * (Math.sin(i) * 10) + offsetX);
             y = Math.round(amp + i/30  * (Math.cos(i) * 10) + offsetY);
-            canvasCtx.fillStyle = "rgba(41, 45, 48, " + opacity + ")";
+            canvasCtx.fillStyle = "rgba(255, 255, 255, " + opacity + ")";
+            //canvasCtx.fillStyle = "rgba(41, 45, 48, " + opacity + ")";
             canvasCtx.fillRect(x, y, sz, sz);
 
             opacity -= 0.002;
@@ -25,6 +26,7 @@ var lissajous = (function(){
         canvasCtx = scope.getContext("2d");
 
         drawLogo();
+        //scope.className = "unBlur";
     };
 
     return {
