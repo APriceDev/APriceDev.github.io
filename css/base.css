@@ -1,13 +1,22 @@
 body{
-    background-color: rgba(252,202,3,1);
+    background-color: rgba(156,39,176,1);
+    /*background-color: rgba(252,202,3,1);*/
     margin: 0px;
     padding: 0px;
-    font-family: sans-serif;
-    font-size: 1em;
-    color:  rgba(41,45,48,1);
+    font-family: 'Roboto', sans-serif;
+    color:  rgba(255,255,255,1);
+    /*color:  rgba(41,45,48,1);*/
     height: 100%;
 }
 
+a{
+    color:  rgba(255,255,255,1);
+}
+
+a:link{
+    font-size: 0.8em;
+    text-decoration: none;
+}
 #container{
     display: flex;
     height: 100%;
@@ -19,11 +28,17 @@ body{
 }
 
 #marquee{
-    letter-spacing: 2.2em;
-    font-weight: bold;
-    margin-top: 10%;
-    padding: 1.8em;
+    letter-spacing: 0.25em;
+    font-weight: 100;
+    font-size: 4em;
+}
 
+#subMarquee{
+    color:  rgba(255,255,255,0.5);
+    letter-spacing: 0.25em;
+    font-weight: 100;
+    font-size: 1.25em;
+    padding: 1.8em;
 }
 
 #scope{
@@ -50,8 +65,10 @@ body{
 
 
 header, footer{
-    background-color: rgba(41,45,48,1);
-    color: rgba(252,202,3,1);
+    background-color: rgba(255,2555,255,0.25);
+    /*background-color: rgba(41,45,48,1);
+    color: rgba(252,202,3,1);*/
+    height: 1em;
     padding: 1%;
     width: 98%;
 }
@@ -64,7 +81,8 @@ footer{
     position: absolute;
     bottom: 0;
     left: 0;
-    color: rgba(252,202,3,1);
-    font-size: 0.6em;
+    /*color: rgba(252,202,3,1);
+    font-size: 0.8em;
+    */
     text-align: center;
 }
