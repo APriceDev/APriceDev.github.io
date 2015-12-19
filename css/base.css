@@ -10,13 +10,13 @@ body{
 }
 
 a{
-    color:  rgba(255,255,255,0.8);
+    color:  rgba(255,255,255,0.5);
     font-weight: 100;
 }
 
 a:link{
-
     text-decoration: none;
+    font-weight: 400;
 }
 #container{
     display: flex;
@@ -32,6 +32,7 @@ a:link{
     letter-spacing: 0.25em;
     font-weight: 100;
     font-size: 4em;
+    margin-top: 3%;
 }
 
 #subMarquee{
@@ -39,12 +40,12 @@ a:link{
     letter-spacing: 0.15em;
     font-weight: 100;
     font-size: 1.25em;
-    padding: 1.8em;
 }
 
 #scope{
     -webkit-filter: blur(80px);
     filter: blur(80px);
+    padding: 1.25em;
 }
 
 .unBlur{
@@ -61,14 +62,11 @@ a:link{
   to {
     -webkit-filter: blur(0px);
     filter: blur(0px);
-  }
+    }
 }
 
-
 header, footer{
-    background-color: rgba(255,2555,255,0.25);
-    /*background-color: rgba(41,45,48,1);
-    color: rgba(252,202,3,1);*/
+    background-color: rgba(255,2555,255,0);
     height: 1em;
     padding: 1%;
     width: 98%;
