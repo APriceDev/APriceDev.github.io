@@ -1,11 +1,9 @@
 body{
     background-color: rgba(#553A7A);
-    /*background-color: rgba(252,202,3,1);*/
     margin: 0px;
     padding: 0px;
     font-family: 'Roboto', sans-serif;
     color:  rgba(255,255,255,1);
-    /*color:  rgba(41,45,48,1);*/
     height: 100%;
 }
 
@@ -102,8 +100,5 @@ footer{
     position: absolute;
     bottom: 0;
     left: 0;
-    /*color: rgba(252,202,3,1);
-    font-size: 0.8em;
-    */
     text-align: center;
 }
