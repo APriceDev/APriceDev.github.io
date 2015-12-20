@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(156,39,176,1);
+    background-color: rgba(#553A7A);
     /*background-color: rgba(252,202,3,1);*/
     margin: 0px;
     padding: 0px;
@@ -26,6 +26,28 @@ a:link{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+body{
+    animation: fading 60s infinite;
+}
+
+@keyframes fading {
+    0%   { background: #553A7A; }
+    20%  { background: #3F7993; }
+    40%  { background: #C32583; }
+    60% { background: #F08904; }
+    80% { background: #A53BA8; }
+    100%   { background: #553A7A;}
+}
+
+@-webkit-keyframes fading {
+    0%   { background: #553A7A; }
+    20%  { background: #3F7993; }
+    40%  { background: #C32583; }
+    60% { background: #F08904; }
+    80% { background: #A53BA8; }
+    100%   { background: #553A7A;}
 }
 
 #marquee{
