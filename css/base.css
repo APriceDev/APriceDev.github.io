@@ -27,7 +27,7 @@ a:link{
 }
 
 body{
-    animation: fading 60s infinite;
+    animation: fading 45s infinite;
 }
 
 @keyframes fading {
